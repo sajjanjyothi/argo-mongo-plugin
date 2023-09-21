@@ -1,11 +1,10 @@
-FROM golang:1.12.0-alpine3.9
+FROM golang:1.21-alpine
 
 RUN apk add --no-cache git
 
 WORKDIR /go/src/app
 
 COPY . .
+RUN go build -o bin/app ./...
 
-RUN go build ./... -o bin/app
-
-CMD ["app"]
+CMD ["bin/app"]

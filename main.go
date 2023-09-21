@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -65,9 +64,7 @@ func main() {
 			return fmt.Errorf("Error getting collection from plugin payload: %v", err)
 		}
 
-		ctx, cancel := context.WithDeadline(context.Background(), time.Now().Add(DBTimeout))
-		defer cancel()
-
+		ctx := c.Request().Context()
 		message := ""
 		insertedID := ""
 		var dbCollection *mongo.Collection
